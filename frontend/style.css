@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    background-color: #0c0c0c;
+    color: #e0e0e0;
+  }
+
+  header {
+    background-color: #111;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    color: #f4f4f4;
+    letter-spacing: 2px;
+  }
+
+  nav button {
+    margin: 0 0.5rem;
+    background-color: #222;
+    color: #f4f4f4;
+    border: 1px solid #444;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  nav button:hover {
+    background-color: #444;
+  }
+
+  main {
+    padding: 2rem;
+  }
+
+  .painel {
+    display: none;
+    margin-top: 2rem;
+  }
+
+  .painel.active {
+    display: block;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    border-left: 4px solid #999;
+    padding-left: 1rem;
+  }
+
+  canvas {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    margin-bottom: 2rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #444;
+  }
+
+  th {
+    background-color: #222;
+    color: #fff;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #111;
+    color: #888;
+    border-top: 1px solid #444;
+  }
+
+  form input, form select {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 100%;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    color: #e0e0e0;
+  }
+
+  form button {
+    background-color: #444;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  form button:hover {
+    background-color: #666;
+  }
