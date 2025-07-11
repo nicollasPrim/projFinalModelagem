@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
-  <script src="btnShow.js"defer></script>
-  <script src="progUsuario.js"defer></script>
-  <script src="progProduto.js"defer></script>
-  <script src="progCompra.js"defer></script>
-  <script src="progGrafico.js"defer></script>
-  <script src="progRelatorio.js"defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"defer></script>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js" />
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard</title>
+        <script src="btnShow.js" defer></script>
+        <script src="progUsuario.js" defer></script>
+        <script src="progProduto.js" defer></script>
+        <script src="progCompra.js" defer></script>
+        <script src="progGrafico.js" defer></script>
+        <script src="progRelatorio.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+        <link rel="stylesheet" href="style.css" />
+      </head>
+      
 <body>
   <header>
     <h1>Loja admin</h1>
@@ -30,6 +30,8 @@
       <h2>Gerenciar Usuários</h2>
       <form id="formUsuario">
         <input type="number" placeholder="ID" id="id" />
+        <button type="button" id="buscar">Buscar</button>
+        <br>
         <input type="text" placeholder="Primeiro Nome" id="firstName" />
         <input type="text" placeholder="Sobrenome" id="lastName" />
         <input type="number" placeholder="Idade" id="age" />
@@ -46,32 +48,15 @@
         <button type="button" id="listarUsuarios">Listar Todos</button>
         <button type="button" id="apagarUsuarios">Apagar</button>
       </form>
-
-      <table id="tabelaUsuarios">
-        <thead>
-        <br>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div id="res"></div>
     </section>
 
     <section id="produtos" class="painel hidden">
       <h2>Gerenciar Produtos</h2>
-      <!-- Formulário e tabela de produtos -->
     </section>
 
     <section id="compras" class="painel hidden">
       <h2>Gerenciar Compras</h2>
-      <!-- Formulário e tabela de compras -->
     </section>
 
     <section id="graficos" class="painel hidden">

@@ -1,18 +1,19 @@
 const Usuario = require('../model/usuario')
 
-const cadastrar = async(req, res) =>{
+const cadastrar = async (req, res) => {
     const valores = req.body
     try {
-        const dados = await Usuario.create(valores)
-        console.log(dados)
-        res.status(201).json(dados)
+      const dados = await Usuario.create(valores)
+      console.log('Usuário cadastrado:', dados)
+      res.status(201).json(dados)
     } catch (err) {
-        console.error('Não foi possivel cadastrar!', err)
-        res.status(200).json({
-            message: 'Não foi possivel cadastrar!'
-        })
+      console.error('Erro ao cadastrar usuário:', err)
+      res.status(500).json({ 
+        message: 'Não foi possível cadastrar!' 
+    })
     }
-}
+  }
+  
 
 const consultar = async(req, res) =>{
     const id = req.params.id
@@ -60,7 +61,7 @@ const apagar = async(req, res) =>{
     try {
         const valor = await Usuario.findByPk(id)
         if (valor) {
-            await Usuario.destroy({where: {id_usuario: id}})
+            await Usuario.destroy({where: {id: id}})
             console.log('Dados apagados!')
             res.status(200).json({
                 message: 'Dados apagados!'
@@ -85,7 +86,7 @@ const atualizar = async(req, res) =>{
     try {
         const valor = await Usuario.findByPk(id)
         if (valor) {
-            await Usuario.update(valores, {where: {id_usuario: id}})
+            await Usuario.update(valores, {where: {id: id}})
             const dados = await Usuario.findByPk(id)
             console.log(dados)
             res.status(200).json(dados)

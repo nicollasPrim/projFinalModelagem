@@ -34,3 +34,7 @@ app.put('/produto/:id', produtoController.atualizar)
 app.delete('/produto/:id', produtoController.apagar)
 
 conn.sync()
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://${host}:${PORT}`)
+})
