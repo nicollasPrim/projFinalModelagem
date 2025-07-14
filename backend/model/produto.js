@@ -40,6 +40,7 @@ const Produto = db.define('produtos', {
         allowNull: false
     }
 }, {
+    tableName: 'produtos',
     timestamps: false
 })
 

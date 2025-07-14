@@ -15,7 +15,7 @@ cadastrar.addEventListener('click', (e) => {
     const discount = Number(document.getElementById('discount').value)
     const finalPrice = unitPrice * quantity * (1 - discount / 100)
 
-    const compra = {
+    const compras = {
         userId: document.getElementById('userId').value,
         productId: document.getElementById('productId').value,
         quantity: quantity,
@@ -27,12 +27,12 @@ cadastrar.addEventListener('click', (e) => {
         status: document.getElementById('status').value
     }
 
-    fetch('http://localhost:3000/compra', {
+    fetch('http://localhost:3000/compras', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(compra)
+        body: JSON.stringify(compras)
     })
     .then(resp => resp.json())
     .then(dados => {
@@ -51,7 +51,7 @@ cadastrar.addEventListener('click', (e) => {
         form.reset()
     })
     .catch(err => {
-        res.innerHTML = "Erro ao cadastrar a compra"
+        res.innerHTML = "Erro ao cadastrar a compras"
         console.error(err)
     })
 })
@@ -60,7 +60,7 @@ consultar.addEventListener('click', (e) =>{
     e.preventDefault()
     const id = document.getElementById('id').value
 
-    fetch(`http://localhost:3000/compra/${id}`, {
+    fetch(`http://localhost:3000/compras/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ consultar.addEventListener('click', (e) =>{
             <p><strong>Status:</strong> ${dados.status}</p>`
     })
     .catch(err => {
-        res.innerHTML = "Erro ao consultar a compra"
+        res.innerHTML = "Erro ao consultar a compras"
         console.error(err)
     })
 })
@@ -89,7 +89,7 @@ consultar.addEventListener('click', (e) =>{
 listar.addEventListener('click', (e)=>{
     e.preventDefault()
 
-    fetch(`http://localhost:3000/compra`, {
+    fetch(`http://localhost:3000/compras`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -112,7 +112,7 @@ listar.addEventListener('click', (e)=>{
         `).join('')
     })
     .catch(err => {
-        res.innerHTML = "Erro ao listar compras"
+        res.innerHTML = "Erro ao listar comprass"
         console.error(err)
     })
 })
@@ -121,7 +121,7 @@ apagar.addEventListener('click', (e)=>{
     e.preventDefault()
     const id = document.getElementById('id').value
 
-    fetch(`http://localhost:3000/compra/${id}`, {
+    fetch(`http://localhost:3000/compras/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -129,18 +129,43 @@ apagar.addEventListener('click', (e)=>{
     })
     .then(resp => resp.json())
     .then(() =>{
-        res.innerHTML = `Compra apagada com sucesso!`
+        res.innerHTML = `compras apagada com sucesso!`
     })
     .catch(err => {
-        res.innerHTML = "Erro ao apagar a compra"
+        res.innerHTML = "Erro ao apagar a compras"
         console.error(err)
     })
 })
 
-buscar.addEventListener('click', (e) =>{
+buscar.addEventListener('click', (e) => {
     e.preventDefault()
-    
+
+    const id = document.getElementById('id').value
+
+    fetch(`http://localhost:3000/compras/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(compras => {
+        document.getElementById('userId').value = compras.userId
+        document.getElementById('productId').value = compras.productId
+        document.getElementById('quantity').value = compras.quantity
+        document.getElementById('purchaseDate').value = compras.purchaseDate
+        document.getElementById('unitPrice').value = compras.unitPrice
+        document.getElementById('discount').value = compras.discount
+        document.getElementById('finalPrice').value = compras.finalPrice
+        document.getElementById('paymentMethod').value = compras.paymentMethod
+        document.getElementById('status').value = compras.status
+    })
+    .catch(err => {
+        res.innerHTML = "Erro ao buscar o produto: ", err.message
+        console.error(err)
+    })
 })
+
 
 atualizar.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -163,7 +188,7 @@ atualizar.addEventListener('click', (e)=>{
         status: document.getElementById('status').value
     }
 
-    fetch(`http://localhost:3000/compra/${id}`, {
+    fetch(`http://localhost:3000/compras/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -185,7 +210,7 @@ atualizar.addEventListener('click', (e)=>{
             <p><strong>Status:</strong> ${dados.status}</p>`
     })
     .catch(err => {
-        res.innerHTML = "Erro ao atualizar a compra"
+        res.innerHTML = "Erro ao atualizar a compras"
         console.error(err)
     })
 })

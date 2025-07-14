@@ -25,7 +25,7 @@ cadastrar.addEventListener('click', (e) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(produto)
+        body: JSON.stringify(produtos)
     })
     .then(resp => resp.json())
     .then(dados => {
@@ -39,11 +39,11 @@ cadastrar.addEventListener('click', (e) => {
             <p><strong>Estoque:</strong> ${dados.stock}</p>
             <p><strong>Marca:</strong> ${dados.brand}</p>
         `
-        console.log("Produto cadastrado:", dados)
+        console.log("produtos cadastrado:", dados)
         form.reset()
     })
     .catch(err => {
-        res.innerHTML = "Erro ao cadastrar o produto"
+        res.innerHTML = "Erro ao cadastrar o produtos"
         console.error(err)
     })
 })
@@ -52,7 +52,7 @@ consultar.addEventListener('click', (e) =>{
     e.preventDefault()
     const id = document.getElementById('id').value
 
-    fetch(`http://localhost:3000/produto/${id}`, {
+    fetch(`http://localhost:3000/produtos/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ consultar.addEventListener('click', (e) =>{
             <p><strong>Marca:</strong> ${dados.brand}</p>`
     })
     .catch(err => {
-        res.innerHTML = "Erro ao consultar o produto"
+        res.innerHTML = "Erro ao consultar o produtos"
         console.error(err)
     })
 })
@@ -79,7 +79,7 @@ consultar.addEventListener('click', (e) =>{
 listar.addEventListener('click', (e)=>{
     e.preventDefault()
 
-    fetch(`http://localhost:3000/produto`, {
+    fetch(`http://localhost:3000/produtos`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ listar.addEventListener('click', (e)=>{
         `).join('')
     })
     .catch(err => {
-        res.innerHTML = "Erro ao listar os produtos"
+        res.innerHTML = "Erro ao listar os produtoss"
         console.error(err)
     })
 })
@@ -109,7 +109,7 @@ apagar.addEventListener('click', (e)=>{
     e.preventDefault()
     const id = document.getElementById('id').value
 
-    fetch(`http://localhost:3000/produto/${id}`, {
+    fetch(`http://localhost:3000/produtos/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -117,18 +117,39 @@ apagar.addEventListener('click', (e)=>{
     })
     .then(resp => resp.json())
     .then(() =>{
-        res.innerHTML = `Produto apagado com sucesso!`
+        res.innerHTML = `produtos apagado com sucesso!`
     })
     .catch(err => {
-        res.innerHTML = "Erro ao apagar o produto"
+        res.innerHTML = "Erro ao apagar o produtos"
         console.error(err)
     })
 })
 
-buscar.addEventListener('click', (e) =>{
+buscar.addEventListener('click', (e) => {
     e.preventDefault()
 
+    const id = document.getElementById('id').value
 
+    fetch(`http://localhost:3000/produtos/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(produtos => {
+        document.getElementById('title').value = produtos.title
+        document.getElementById('description').value = produtos.description
+        document.getElementById('category').value = produtos.category
+        document.getElementById('price').value = produtos.price
+        document.getElementById('discountPercentage').value = produtos.discountPercentage
+        document.getElementById('stock').value = produtos.stock
+        document.getElementById('brand').value = produtos.brand
+    })
+    .catch(err => {
+        res.innerHTML = "Erro ao buscar o produto: ", err.message
+        console.error(err)
+    })
 })
 
 atualizar.addEventListener('click', (e)=>{
@@ -146,7 +167,7 @@ atualizar.addEventListener('click', (e)=>{
         brand: document.getElementById('brand').value
     }
 
-    fetch(`http://localhost:3000/produto/${id}`, {
+    fetch(`http://localhost:3000/produtos/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -166,7 +187,7 @@ atualizar.addEventListener('click', (e)=>{
             <p><strong>Marca:</strong> ${dados.brand}</p>`
     })
     .catch(err => {
-        res.innerHTML = "Erro ao atualizar o produto"
+        res.innerHTML = "Erro ao atualizar o produtos"
         console.error(err)
     })
 })

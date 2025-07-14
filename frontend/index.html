@@ -29,7 +29,7 @@
     <section id="usuarios" class="painel">
       <h2>Gerenciar Usuários</h2>
       <form id="formUsuario">
-        <input type="number" placeholder="ID" id="id" />
+        <input type="number" placeholder="Código" id="id" />
         <button type="button" id="buscar">Buscar</button>
         <br>
         <input type="text" placeholder="Primeiro Nome" id="firstName" />
@@ -42,21 +42,57 @@
         <input type="text" placeholder="Estado (UF)" maxlength="2" id="state" />
         <input type="date" placeholder="Data de Nascimento" id="birthDate" />
 
-        <button type="submit" id="cadastrarUsuario">Cadastrar</button>
-        <button type="submit" id="atualizarUsuario">Atualizar</button>
-        <button type="button" id="consultarUsuario">Consultar</button>
-        <button type="button" id="listarUsuarios">Listar Todos</button>
-        <button type="button" id="apagarUsuarios">Apagar</button>
+        <button id="cadastrarUsuario">Cadastrar</button>
+        <button id="atualizarUsuario">Atualizar</button>
+        <button id="consultarUsuario">Consultar</button>
+        <button id="listarUsuarios">Listar Todos</button>
+        <button id="apagarUsuarios">Apagar</button>
       </form>
       <div id="res"></div>
     </section>
 
     <section id="produtos" class="painel hidden">
       <h2>Gerenciar Produtos</h2>
+      <form id="formProdutos">
+        <input type="number" placeholder="Código" id="id" />
+        <button type="button" id="buscar">Buscar</button>
+        <br>
+        <input type="text" placeholder="Título do Produto" id="title" />
+        <input type="text" placeholder="Descrição" id="description" />
+        <input type="text" placeholder="Categoria" id="category" />
+        <input type="number" placeholder="Preço" id="price" />
+        <input type="number" placeholder="% de Desconto" id="discountPercentage" />
+        <input type="number" placeholder="Estoque" id="stock" />
+        <input type="text" placeholder="Marca" id="brand" />
+
+        <button type="submit" id="cadastrarProduto">Cadastrar</button>
+        <button type="submit" id="atualizarProduto">Atualizar</button>
+        <button type="button" id="consultarProduto">Consultar</button>
+        <button type="button" id="listarProduto">Listar Todos</button>
+        <button type="button" id="apagarProduto">Apagar</button>
+      </form>
     </section>
 
     <section id="compras" class="painel hidden">
       <h2>Gerenciar Compras</h2>
+      <form id="formCompra">
+        <input type="number" placeholder="Código" id="id" />
+        <button type="button" id="buscar">Buscar</button>
+        <br>
+        <input type="number" placeholder="Quantidade" id="quantity" />
+        <input type="date" placeholder="Data da Compra" id="purchaseDate" />
+        <input type="number" placeholder="Preço Unitário" id="unitPrice" />
+        <input type="number" placeholder="Desconto Aplicado (%)" id="discount" />
+        <input type="number" placeholder="Preço Final (calculado)" id="finalPrice" readonly />
+        <input type="text" placeholder="Forma de Pagamento" id="paymentMethod" />
+        <input type="text" placeholder="Status da Compra" id="status" />
+
+        <button type="submit" id="cadastrarCompra">Cadastrar</button>
+        <button type="submit" id="atualizarCompra">Atualizar</button>
+        <button type="button" id="consultarCompra">Consultar</button>
+        <button type="button" id="listarCompra">Listar Todos</button>
+        <button type="button" id="apagarCompra">Apagar</button>
+      </form>
     </section>
 
     <section id="graficos" class="painel hidden">
