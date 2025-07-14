@@ -60,7 +60,7 @@ const apagar = async(req, res) =>{
     try {
         const valor = await Compra.findByPk(id)
         if (valor) {
-            await Compra.destroy({where: {id_compra: id}})
+            await Compra.destroy({where: {id: id}})
             console.log('Dados apagados!')
             res.status(200).json({
                 message: 'Dados apagados!'
@@ -85,7 +85,7 @@ const atualizar = async(req, res) =>{
     try {
         const valor = await Compra.findByPk(id)
         if (valor) {
-            await Compra.update(valores, {where: {id_compra: id}})
+            await Compra.update(valores, {where: {id: id}})
             const dados = await Compra.findByPk(id)
             console.log(dados)
             res.status(200).json(dados)

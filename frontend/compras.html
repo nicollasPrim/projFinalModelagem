@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+        <script src="progCompra.js" defer></script>
+        <link rel="stylesheet" href="style.css" />
+      </head>
+<body>
+  <header>
+    <h1>Loja admin</h1>
+    <nav>
+      <button onclick="window.location.href='usuarios.html'">Usuários</button>
+      <button onclick="window.location.href='produtos.html'">Produtos</button>
+      <button onclick="window.location.href='compras.html'">Compras</button>
+      <button onclick="window.location.href='graficos.html'">Gráficos</button>
+      <button onclick="window.location.href='relatorios.html'">Relatórios</button>      
+    </nav>
+  </header>
+  <main>
+    <section id="compras" class="painel hidden">
+        <h2>Gerenciar Compras</h2>
+        <form id="formCompra">
+          <input type="number" placeholder="Código" id="id" />
+          <button type="button" id="buscar">Buscar</button>
+          <br>
+          <input type="number" placeholder="Código Usuário" id="id_usuario" />
+          <input type="number" placeholder="Código Produto" id="id_produto" />
+          <input type="number" placeholder="Quantidade" id="quantidade" />
+          <input type="date" placeholder="Data da Compra" id="dt_compra" />
+          <input type="number" placeholder="Preço Unitário" id="preco_unit" />
+          <input type="number" placeholder="Desconto Aplicado (%)" id="desc_aplicado" />
+          <input type="text" placeholder="Forma de Pagamento" id="forma_pagamento" />
+          <input type="text" placeholder="Status da Compra" id="status_compra" />          
+  
+          <button type="submit" id="cadastrarCompra">Cadastrar</button>
+          <button type="submit" id="atualizarCompra">Atualizar</button>
+          <button type="button" id="consultarCompra">Consultar</button>
+          <button type="button" id="listarCompra">Listar Todos</button>
+          <button type="button" id="apagarCompra">Apagar</button>
+        </form>
+      </section>  
+      <div id="res"></div>
+  </main>
+</body>
+</html>

@@ -13,7 +13,7 @@ cadastrar.addEventListener('click', (e) => {
     const usuario = {
     firstName: document.getElementById('firstName').value,
     lastName: document.getElementById('lastName').value,
-    age: parseInt(document.getElementById('age').value),
+    age: Number(document.getElementById('age').value),
     email: document.getElementById('email').value,
     phone: document.getElementById('phone').value,
     address: document.getElementById('address').value,
@@ -28,19 +28,18 @@ cadastrar.addEventListener('click', (e) => {
     body: JSON.stringify(usuario)
     })
     .then(resp => resp.json())
-    .then(dados => {
+    .then(usuario => {
     res.innerHTML = `
-        <p><strong>ID:</strong> ${dados.id}</p>
-        <p><strong>Nome:</strong> ${dados.firstName} ${dados.lastName}</p>
-        <p><strong>Idade:</strong> ${dados.age}</p>
-        <p><strong>Email:</strong> ${dados.email}</p>
-        <p><strong>Telefone:</strong> ${dados.phone}</p>
-        <p><strong>Endereço:</strong> ${dados.address}</p>
-        <p><strong>Cidade:</strong> ${dados.city}</p>
-        <p><strong>Estado:</strong> ${dados.state}</p>
-        <p><strong>Nascimento:</strong> ${dados.birthDate}</p>
+        <p><strong>ID:</strong> ${usuario.id}</p>
+        <p><strong>Nome:</strong> ${usuario.firstName} ${usuario.lastName}</p>
+        <p><strong>Idade:</strong> ${usuario.age}</p>
+        <p><strong>Email:</strong> ${usuario.email}</p>
+        <p><strong>Telefone:</strong> ${usuario.phone}</p>
+        <p><strong>Endereço:</strong> ${usuario.address}</p>
+        <p><strong>Cidade:</strong> ${usuario.city}</p>
+        <p><strong>Estado:</strong> ${usuario.state}</p>
+        <p><strong>Nascimento:</strong> ${usuario.birthDate}</p>
     `
-    form.reset()
     })
     .catch(err => {
     res.innerHTML = "Erro ao cadastrar o usuário: " + err.message
@@ -54,27 +53,34 @@ consultar.addEventListener('click', (e) =>{
 
     const id = document.getElementById('id').value
 
-    .fetch(`http://localhost:3000/usuarios/${id}`, {
+    fetch(`http://localhost:3000/usuario/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     })
-    then(resp => resp.json())
-    then(dados =>{
-                res.innerHTML = `
-            <p><strong>ID:</strong> ${id}</p>
-            <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
-            <p><strong>Idade:</strong> ${age}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Telefone:</strong> ${phone}</p>
-            <p><strong>Endereço:</strong> ${address}</p>
-            <p><strong>Cidade:</strong> ${city}</p>
-            <p><strong>Estado:</strong> ${state}</p>
-            <p><strong>Nascimento:</strong> ${birthDate}</p>`
+    .then(resp => resp.json())
+    .then(usuario => {
+
+        const dataCompleta = document.getElementById('birthDate').value = usuario.birthDate
+
+        const soData = dataCompleta.split("T")[0]
+
+        res.innerHTML = ``
+        res.innerHTML = `
+        
+            <p><strong>ID:</strong> ${usuario.id}</p>
+            <p><strong>Nome:</strong> ${usuario.firstName} ${usuario.lastName}</p>
+            <p><strong>Idade:</strong> ${usuario.age}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+            <p><strong>Telefone:</strong> ${usuario.phone}</p>
+            <p><strong>Endereço:</strong> ${usuario.address}</p>
+            <p><strong>Cidade:</strong> ${usuario.city}</p>
+            <p><strong>Estado:</strong> ${usuario.state}</p>
+            <p><strong>Nascimento:</strong> ${usuario.birthDate}</p>`
     })
     .catch(err => {
-        res.innerHTML = "Erro ao consultar o usuário"
+        res.innerHTML = "Erro ao buscar o usuario: ", err.message
         console.error(err)
     })
 })
@@ -82,27 +88,30 @@ consultar.addEventListener('click', (e) =>{
 listar.addEventListener('click', (e)=>{
     e.preventDefault()
 
-    .fetch(`http://localhost:3000/usuarios/`, {
+    fetch(`http://localhost:3000/usuario`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     })
-    then(resp => resp.json())
-    then(dados =>{
-        res.innerHTML = `
-            <p><strong>ID:</strong> ${id}</p>
-            <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
-            <p><strong>Idade:</strong> ${age}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Telefone:</strong> ${phone}</p>
-            <p><strong>Endereço:</strong> ${address}</p>
-            <p><strong>Cidade:</strong> ${city}</p>
-            <p><strong>Estado:</strong> ${state}</p>
-            <p><strong>Nascimento:</strong> ${birthDate}</p>`
+    .then(resp => resp.json())
+    .then(dados =>{
+        res.innerHTML = ""
+        dados.forEach(e => {
+            res.innerHTML += `<br>
+                <p><strong>ID:</strong> ${e.id}</p>
+                <p><strong>Nome:</strong> ${e.firstName} ${e.lastName}</p>
+                <p><strong>Idade:</strong> ${e.age}</p>
+                <p><strong>Email:</strong> ${e.email}</p>
+                <p><strong>Telefone:</strong> ${e.phone}</p>
+                <p><strong>Endereço:</strong> ${e.address}</p>
+                <p><strong>Cidade:</strong> ${e.city}</p>
+                <p><strong>Estado:</strong> ${e.state}</p>
+                <p><strong>Nascimento:</strong> ${e.birthDate.split('T')[0]}</p><br>`
+        })
     })
     .catch(err => {
-        res.innerHTML = "Erro ao consultar o usuário"
+        res.innerHTML = "Erro ao listar os usuários"
         console.error(err)
     })
 })
@@ -112,14 +121,14 @@ apagar.addEventListener('click', (e)=>{
 
     const id = document.getElementById('id').value
 
-    .fetch(`http://localhost:3000/usuarios/${id}`, {
+    fetch(`http://localhost:3000/usuario/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
-    then(resp => resp.json())
-    then(dados =>{
+    .then(resp => resp.json())
+    .then(dados =>{
         res.innerHTML = `Dados apagados com sucesso!`
     })
     .catch(err => {
@@ -133,7 +142,7 @@ buscar.addEventListener('click', (e) => {
 
     const id = document.getElementById('id').value
 
-    fetch(`http://localhost:3000/usuarios/${id}`, {
+    fetch(`http://localhost:3000/usuario/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -141,6 +150,12 @@ buscar.addEventListener('click', (e) => {
     })
     .then(resp => resp.json())
     .then(usuarios => {
+
+        const dataCompleta = document.getElementById('birthDate').value = usuarios.birthDate
+
+        const soData = dataCompleta.split("T")[0]
+
+        document.getElementById("birthDate").value = soData
         document.getElementById('firstName').value = usuarios.firstName
         document.getElementById('lastName').value = usuarios.lastName
         document.getElementById('age').value = usuarios.age
@@ -149,7 +164,6 @@ buscar.addEventListener('click', (e) => {
         document.getElementById('address').value = usuarios.address
         document.getElementById('city').value = usuarios.city
         document.getElementById('state').value = usuarios.state
-        document.getElementById('birthDate').value = usuarios.birthDate
         
     })
     .catch(err => {
@@ -159,15 +173,15 @@ buscar.addEventListener('click', (e) => {
 })
 
 
-atualizar.addEventListener('click', (e)=>{
+atualizar.addEventListener('click', (e) => {
     e.preventDefault()
 
-    const id = document.getElementById('id')
+    const id = document.getElementById('id').value
 
     const dados = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
-        age: parseInt(document.getElementById('age').value),
+        age: Number(document.getElementById('age').value),
         email: document.getElementById('email').value,
         phone: document.getElementById('phone').value,
         address: document.getElementById('address').value,
@@ -176,24 +190,30 @@ atualizar.addEventListener('click', (e)=>{
         birthDate: document.getElementById('birthDate').value
     }
 
-    .fetch(`http://localhost:3000/usuarios/${id}`, {
+    fetch(`http://localhost:3000/usuario/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(dados)
     })
-    then(resp => resp.json())
-    then(dados => {
+    .then(resp => resp.json())
+    .then(usuario => {
+
         res.innerHTML = `
-            <p><strong>ID:</strong> ${id}</p>
-            <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
-            <p><strong>Idade:</strong> ${age}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Telefone:</strong> ${phone}</p>
-            <p><strong>Endereço:</strong> ${address}</p>
-            <p><strong>Cidade:</strong> ${city}</p>
-            <p><strong>Estado:</strong> ${state}</p>
-            <p><strong>Nascimento:</strong> ${birthDate}</p>`
+            <p><strong>ID:</strong> ${usuario.id}</p>
+            <p><strong>Nome:</strong> ${usuario.firstName} ${usuario.lastName}</p>
+            <p><strong>Idade:</strong> ${usuario.age}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+            <p><strong>Telefone:</strong> ${usuario.phone}</p>
+            <p><strong>Endereço:</strong> ${usuario.address}</p>
+            <p><strong>Cidade:</strong> ${usuario.city}</p>
+            <p><strong>Estado:</strong> ${usuario.state}</p>
+            <p><strong>Nascimento:</strong> ${usuario.birthDate}</p>
+        `
+    })
+    .catch(err => {
+        res.innerHTML = "Erro ao atualizar usuário."
+        console.error(err)
     })
 })

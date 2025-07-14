@@ -4,12 +4,6 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard</title>
-        <script src="btnShow.js" defer></script>
-        <script src="progUsuario.js" defer></script>
-        <script src="progProduto.js" defer></script>
-        <script src="progCompra.js" defer></script>
-        <script src="progGrafico.js" defer></script>
-        <script src="progRelatorio.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
         <link rel="stylesheet" href="style.css" />
       </head>
@@ -18,99 +12,13 @@
   <header>
     <h1>Loja admin</h1>
     <nav>
-      <button onclick="showSection('usuarios')">Usuários</button>
-      <button onclick="showSection('produtos')">Produtos</button>
-      <button onclick="showSection('compras')">Compras</button>
-      <button onclick="showSection('graficos')">Gráficos</button>
-      <button onclick="showSection('relatorios')">Relatórios</button>
+      <button onclick="window.location.href='usuarios.html'">Usuários</button>
+      <button onclick="window.location.href='produtos.html'">Produtos</button>
+      <button onclick="window.location.href='compras.html'">Compras</button>
+      <button onclick="window.location.href='graficos.html'">Gráficos</button>
+      <button onclick="window.location.href='relatorios.html'">Relatórios</button>      
     </nav>
   </header>
-  <main>
-    <section id="usuarios" class="painel">
-      <h2>Gerenciar Usuários</h2>
-      <form id="formUsuario">
-        <input type="number" placeholder="Código" id="id" />
-        <button type="button" id="buscar">Buscar</button>
-        <br>
-        <input type="text" placeholder="Primeiro Nome" id="firstName" />
-        <input type="text" placeholder="Sobrenome" id="lastName" />
-        <input type="number" placeholder="Idade" id="age" />
-        <input type="email" placeholder="Email" id="email" />
-        <input type="text" placeholder="Telefone" id="phone" />
-        <input type="text" placeholder="Endereço" id="address" />
-        <input type="text" placeholder="Cidade" id="city" />
-        <input type="text" placeholder="Estado (UF)" maxlength="2" id="state" />
-        <input type="date" placeholder="Data de Nascimento" id="birthDate" />
-
-        <button id="cadastrarUsuario">Cadastrar</button>
-        <button id="atualizarUsuario">Atualizar</button>
-        <button id="consultarUsuario">Consultar</button>
-        <button id="listarUsuarios">Listar Todos</button>
-        <button id="apagarUsuarios">Apagar</button>
-      </form>
-      <div id="res"></div>
-    </section>
-
-    <section id="produtos" class="painel hidden">
-      <h2>Gerenciar Produtos</h2>
-      <form id="formProdutos">
-        <input type="number" placeholder="Código" id="id" />
-        <button type="button" id="buscar">Buscar</button>
-        <br>
-        <input type="text" placeholder="Título do Produto" id="title" />
-        <input type="text" placeholder="Descrição" id="description" />
-        <input type="text" placeholder="Categoria" id="category" />
-        <input type="number" placeholder="Preço" id="price" />
-        <input type="number" placeholder="% de Desconto" id="discountPercentage" />
-        <input type="number" placeholder="Estoque" id="stock" />
-        <input type="text" placeholder="Marca" id="brand" />
-
-        <button type="submit" id="cadastrarProduto">Cadastrar</button>
-        <button type="submit" id="atualizarProduto">Atualizar</button>
-        <button type="button" id="consultarProduto">Consultar</button>
-        <button type="button" id="listarProduto">Listar Todos</button>
-        <button type="button" id="apagarProduto">Apagar</button>
-      </form>
-    </section>
-
-    <section id="compras" class="painel hidden">
-      <h2>Gerenciar Compras</h2>
-      <form id="formCompra">
-        <input type="number" placeholder="Código" id="id" />
-        <button type="button" id="buscar">Buscar</button>
-        <br>
-        <input type="number" placeholder="Quantidade" id="quantity" />
-        <input type="date" placeholder="Data da Compra" id="purchaseDate" />
-        <input type="number" placeholder="Preço Unitário" id="unitPrice" />
-        <input type="number" placeholder="Desconto Aplicado (%)" id="discount" />
-        <input type="number" placeholder="Preço Final (calculado)" id="finalPrice" readonly />
-        <input type="text" placeholder="Forma de Pagamento" id="paymentMethod" />
-        <input type="text" placeholder="Status da Compra" id="status" />
-
-        <button type="submit" id="cadastrarCompra">Cadastrar</button>
-        <button type="submit" id="atualizarCompra">Atualizar</button>
-        <button type="button" id="consultarCompra">Consultar</button>
-        <button type="button" id="listarCompra">Listar Todos</button>
-        <button type="button" id="apagarCompra">Apagar</button>
-      </form>
-    </section>
-
-    <section id="graficos" class="painel hidden">
-      <h2>Gráficos</h2>
-      <canvas id="graficoEstoque" width="400" height="200"></canvas>
-      <canvas id="graficoIdade" width="400" height="200"></canvas>
-    </section>
-
-    <section id="relatorios" class="painel hidden">
-      <h2>Relatórios Gerenciais</h2>
-      <div id="relatorioUsuarios"></div>
-      <div id="relatorioProdutos"></div>
-      <div id="relatorioCompras"></div>
-      <div id="relatorioEstoqueCritico"></div>
-      <div id="relatorioConsolidado"></div>
-    </section>
-  </main>
-
   <footer>
     <p>&copy; 2025 - Nicollas Prim</p>
   </footer>

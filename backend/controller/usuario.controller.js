@@ -80,28 +80,31 @@ const apagar = async(req, res) =>{
     }
 }
 
-const atualizar = async(req, res) =>{
-    const id = req.params.id
-    const valores = req.body
+const atualizar = async(req, res) => {
+    const id = req.params.id;
+    const valores = req.body;
     try {
-        const valor = await Usuario.findByPk(id)
-        if (valor) {
-            await Usuario.update(valores, {where: {id: id}})
-            const dados = await Usuario.findByPk(id)
-            console.log(dados)
-            res.status(200).json(dados)
-        } else {
-            console.error('Dados não encontrados!', err)
-            res.status(404).json({
-                message: 'Dados não encontrados!'
-            })
+        const valor = await Usuario.findByPk(id);
+        if (!valor) {
+            console.error('Usuário não encontrado para id:', id);
+            return res.status(404).json({ 
+                message: 'Usuário não encontrado!' 
+            });
         }
+        console.log('Usuário encontrado:', valor.toJSON());
+
+        if (valores.birthDate) {
+            valores.birthDate = new Date(valores.birthDate);
+            console.log('birthDate convertida:', valores.birthDate);
+        }
+        await Usuario.update(valores, { where: { id } });
+        const dadosAtualizados = await Usuario.findByPk(id);
+        console.log('Usuário atualizado:', dadosAtualizados.toJSON());
+        res.status(200).json(dadosAtualizados);
     } catch (err) {
-        console.error('Não foi possivel atualizar os dados!', err)
-        res.status(501).json({
-            message: 'Não foi possivel atualizar os dados!'
-        })
+        console.error('Erro na atualização:', err);
+        res.status(500).json({ message: 'Erro ao atualizar usuário' });
     }
-}
+};
 
 module.exports = { cadastrar, consultar, listar, atualizar, apagar }

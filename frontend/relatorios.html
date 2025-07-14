@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="progRelatorio.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <h1>Loja admin</h1>
+        <nav>
+            <button onclick="window.location.href='usuarios.html'">Usuários</button>
+            <button onclick="window.location.href='produtos.html'">Produtos</button>
+            <button onclick="window.location.href='compras.html'">Compras</button>
+            <button onclick="window.location.href='graficos.html'">Gráficos</button>
+            <button onclick="window.location.href='relatorios.html'">Relatórios</button>      
+        </nav>
+    </header>
+<main>
+    <section id="relatorios" class="painel hidden">
+        <h2>Relatórios Gerenciais</h2>
+        <div id="relatorioUsuarios"></div>
+        <div id="relatorioProdutos"></div>
+        <div id="relatorioCompras"></div>
+        <div id="relatorioEstoqueCritico"></div>
+        <div id="relatorioConsolidado"></div>
+      </section>
+</main>

@@ -4,7 +4,7 @@ const Produto = require('./produto')
 const Usuario = require('./usuario')
 
 const Compra = db.define('compras', {
-  id_compra: {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
@@ -14,7 +14,7 @@ const Compra = db.define('compras', {
     allowNull: false,
     references: {
       model: Produto,
-      key: 'id_produto'
+      key: 'id'
     }
   },
   id_usuario: {

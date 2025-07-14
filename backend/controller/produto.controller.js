@@ -1,105 +1,80 @@
 const Produto = require('../model/produto')
 
-const cadastrar = async(req, res) =>{
+const cadastrar = async (req, res) => {
     const valores = req.body
     try {
         const dados = await Produto.create(valores)
         console.log(dados)
         res.status(201).json(dados)
     } catch (err) {
-        console.error('Não foi possivel cadastrar!', err)
-        res.status(200).json({
-            message: 'Não foi possivel cadastrar!'
-        })
+        console.error('Erro ao cadastrar produto:', err)
+        res.status(500).json({ message: 'Erro ao cadastrar o produto.' })
     }
 }
 
-const consultar = async(req, res) =>{
+const consultar = async (req, res) => {
     const id = req.params.id
     try {
         const valor = await Produto.findByPk(id)
         if (valor) {
             console.log(valor)
-            res.status(200).json(valor)        
+            res.status(200).json(valor)
         } else {
-            console.error('Não há dados cadastrados!', err)
-            res.status(404).json({
-                message: 'Não há dados cadastrados!'
-            })
+            console.warn('Produto não encontrado.')
+            res.status(404).json({ message: 'Produto não encontrado.' })
         }
     } catch (err) {
-        console.error('Não foi possivel consultar!', err)
-        res.status(201).json({
-            message: 'Não foi possivel consultar!'
-        })
+        console.error('Erro ao consultar produto:', err)
+        res.status(500).json({ message: 'Erro ao consultar o produto.' })
     }
 }
 
-const listar = async(req, res) =>{
+const listar = async (req, res) => {
     try {
-        const valor = await Produto.findAll()
-        if (valor) {
-            console.log(valor)
-            res.status(200).json(valor)   
-        } else {
-            console.error('Não há dados cadastrados!', err)
-            res.status(404).json({
-                message: 'Não há dados cadastrados!'
-            })
-        }  
+        const produtos = await Produto.findAll()
+        console.log(`🔍 ${produtos.length} produto(s) encontrados.`)
+        res.status(200).json(produtos)
     } catch (err) {
-        console.error('Não foi possivel listar!', err)
-        res.status(201).json({
-            message: 'Não foi possivel listar!'
-        })
+        console.error('Erro ao listar produtos:', err)
+        res.status(500).json({ message: 'Erro ao listar os produtos.' })
     }
 }
 
-const apagar = async(req, res) =>{
+const apagar = async (req, res) => {
     const id = req.params.id
     try {
-        const valor = await Produto.findByPk(id)
-        if (valor) {
-            await Produto.destroy({where: {id_produto: id}})
-            console.log('Dados apagados!')
-            res.status(200).json({
-                message: 'Dados apagados!'
-            })
+        const produto = await Produto.findByPk(id)
+        if (produto) {
+            await Produto.destroy({ where: { id: id } })
+            console.log('Produto apagado com sucesso.')
+            res.status(200).json({ message: 'Produto apagado com sucesso.' })
         } else {
-            console.error('Dados não encontrados!', err)
-            res.status(404).json({
-                message: 'Dados não encontrados!'
-            })
+            console.warn('Produto não encontrado para exclusão.')
+            res.status(404).json({ message: 'Produto não encontrado.' })
         }
     } catch (err) {
-        console.error('Não foi possivel apagar os dados!', err)
-        res.status(201).json({
-            message: 'Não foi possivel apagar os dados!'
-        })
+        console.error('Erro ao apagar produto:', err)
+        res.status(500).json({ message: 'Erro ao apagar o produto.' })
     }
 }
 
-const atualizar = async(req, res) =>{
+const atualizar = async (req, res) => {
     const id = req.params.id
     const valores = req.body
     try {
-        const valor = await Produto.findByPk(id)
-        if (valor) {
-            await Produto.update(valores, {where: {id_produto: id}})
-            const dados = await Produto.findByPk(id)
-            console.log(dados)
-            res.status(200).json(dados)
+        const produto = await Produto.findByPk(id)
+        if (produto) {
+            await Produto.update(valores, { where: { id: id } })
+            const atualizado = await Produto.findByPk(id)
+            console.log('Produto atualizado:', atualizado)
+            res.status(200).json(atualizado)
         } else {
-            console.error('Dados não encontrados!', err)
-            res.status(404).json({
-                message: 'Dados não encontrados!'
-            })
+            console.warn('Produto não encontrado para atualização.')
+            res.status(404).json({ message: 'Produto não encontrado.' })
         }
     } catch (err) {
-        console.error('Não foi possivel atualizar os dados!', err)
-        res.status(501).json({
-            message: 'Não foi possivel atualizar os dados!'
-        })
+        console.error('Erro ao atualizar produto:', err)
+        res.status(500).json({ message: 'Erro ao atualizar o produto.' })
     }
 }
 
