@@ -85,38 +85,39 @@ consultar.addEventListener('click', (e) => {
 })
 
 listar.addEventListener('click', (e) => {
-    e.preventDefault()
+  e.preventDefault();
 
-    fetch('http://localhost:3000/produto', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+  fetch('http://localhost:3000/produto')
     .then(resp => resp.json())
-    .then(produtos => {
-        res.innerHTML = ""
-        produtos.forEach(p => {
+    .then(dados => {
+      const produtos = dados.products
+      res.innerHTML = ''
 
-            const precoComDesconto = (p.price * (1 - p.discountPercentage / 100)).toFixed(2)
-    
-            res.innerHTML = `
-                <p><strong>ID:</strong> ${p.id}</p>
-                <p><strong>Título:</strong> ${p.title}</p>
-                <p><strong>Descrição:</strong> ${p.description}</p>
-                <p><strong>Categoria:</strong> ${p.category}</p>
-                <p><strong>Preço:</strong> R$ ${p.price.toFixed(2)}</p>
-                <p><strong>Desconto:</strong> ${p.discountPercentage}%</p>
-                <p><strong>Preço com Desconto:</strong> R$ ${precoComDesconto}</p>
-                <p><strong>Estoque:</strong> ${p.stock}</p>
-                <p><strong>Marca:</strong> ${p.brand}</p>
-                <p><strong>Imagem:</strong> <a href="${p.thumbnail}" target="_blank">Visualizar</a></p>
-            `
-        })
+      produtos.forEach(produto => {
+        const precoComDesconto = (
+          produto.price * (1 - produto.discountPercentage / 100)
+        ).toFixed(2);
+
+        res.innerHTML += `
+          <div class="produto">
+          <br>
+            <p><strong>ID:</strong> ${produto.id}</p>
+            <p><strong>Título:</strong> ${produto.title}</p>
+            <p><strong>Descrição:</strong> ${produto.description}</p>
+            <p><strong>Categoria:</strong> ${produto.category}</p>
+            <p><strong>Preço:</strong> R$ ${produto.price.toFixed(2)}</p>
+            <p><strong>Desconto:</strong> ${produto.discountPercentage}%</p>
+            <p><strong>Preço com Desconto:</strong> R$ ${precoComDesconto}</p>
+            <p><strong>Estoque:</strong> ${produto.stock}</p>
+            <p><strong>Marca:</strong> ${produto.brand}</p>
+            <p><strong>Imagem:</strong> <a href="${produto.thumbnail}" target="_blank">Visualizar</a></p>
+          </div>
+        `
+      })
     })
     .catch(err => {
-        res.innerHTML = "Erro ao listar os produtos"
-        console.error(err)
+      res.textContent = 'Erro ao listar os produtos'
+      console.error(err)
     })
 })
 
@@ -133,7 +134,7 @@ apagar.addEventListener('click', (e) => {
     })
     .then(resp => resp.json())
     .then(() => {
-        res.innerHTML = `Produto apagado com sucesso!`
+        res.innerHTML = `<br>Produto apagado com sucesso!`
     })
     .catch(err => {
         res.innerHTML = "Erro ao apagar o produto"
@@ -195,6 +196,7 @@ atualizar.addEventListener('click', (e) => {
     .then(resp => resp.json())
     .then(produto => {
         res.innerHTML = `
+        <br>
             <p><strong>ID:</strong> ${produto.id}</p>
             <p><strong>Título:</strong> ${produto.title}</p>
             <p><strong>Descrição:</strong> ${produto.description}</p>
