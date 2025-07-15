@@ -1,18 +1,19 @@
 const Compra = require('../model/compra')
 
-const cadastrar = async(req, res) =>{
-    const valores = req.body
+const cadastrar = async (req, res) => {
+const valores = req.body
     try {
         const dados = await Compra.create(valores)
-        console.log(dados)
+        console.log('Compra cadastrada:', dados)
         res.status(201).json(dados)
     } catch (err) {
-        console.error('Não foi possivel cadastrar!', err)
-        res.status(200).json({
-            message: 'Não foi possivel cadastrar!'
+        console.error('Não foi possível cadastrar!', err)
+        res.status(500).json({
+        message: 'Não foi possível cadastrar!',
         })
     }
 }
+ 
 
 const consultar = async(req, res) =>{
     const id = req.params.id
