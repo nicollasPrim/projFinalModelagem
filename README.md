@@ -1,6 +1,6 @@
 # 🛒 Sistema de Compras - Projeto Final de Modelagem
 
-Este projeto é um sistema web completo para **gerenciamento de usuários, produtos e compras**, desenvolvido como trabalho final da disciplina de Modelagem de Sistemas do SENAI. Ele combina backend em **Node.js + Express + Sequelize**, banco de dados **MySQL**, e frontend em **HTML, CSS e JavaScript Vanilla**.
+Este projeto é um sistema web completo para **gerenciamento de usuários, produtos e compras**, desenvolvido como trabalho final da disciplina de Modelagem de Sistemas do SESI. Ele combina backend em **Node.js + Express + Sequelize**, banco de dados **MySQL**, e frontend em **HTML, CSS e JavaScript**.
 
 ---
 
