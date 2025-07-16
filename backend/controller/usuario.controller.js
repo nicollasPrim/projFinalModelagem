@@ -1,4 +1,5 @@
 const Usuario = require('../model/usuario')
+const sequelize = require('sequelize')
 
 const cadastrar = async (req, res) => {
     const valores = req.body
