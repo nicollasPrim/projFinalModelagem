@@ -54,7 +54,7 @@ const consultarNome = async(req, res) =>{
 const listar = async (req, res) => {
     try {
         const produtos = await Produto.findAll()
-        console.log(`🔍 ${produtos.length} produto(s) encontrados.`)
+        console.log(` ${produtos.length} produto(s) encontrados.`)
         res.status(200).json(produtos)
     } catch (err) {
         console.error('Erro ao listar produtos:', err)
