@@ -3,7 +3,8 @@ const cadastrar = document.getElementById('cadastrarCompra')
 const buscar = document.getElementById('buscar')
 const atualizar = document.getElementById('atualizarCompra')
 const apagar = document.getElementById('apagarCompra')
-const consultar = document.getElementById('consultarCompra')
+const consultarId = document.getElementById('consultarCompra')
+const consultarNome = document.getElementById('consultarNomeCompra')
 const listar = document.getElementById('listarCompra')
 const res = document.getElementById('res') 
 
@@ -54,7 +55,7 @@ cadastrar.addEventListener('click', (e) => {
 })
 
 
-consultar.addEventListener('click', (e) =>{
+consultarId.addEventListener('click', (e) =>{
     e.preventDefault()
     const id = document.getElementById('id').value
 
@@ -80,6 +81,37 @@ consultar.addEventListener('click', (e) =>{
     })
     .catch(err => {
         res.innerHTML = "Erro ao consultar a compras"
+        console.error(err)
+    })
+})
+
+consultarNome.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const nomeProcura = document.getElementById('nomeProcura').value
+
+    fetch(`http://localhost:3000/compra/nome/${nomeProcura}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(dados => {
+        res.innerHTML = `
+            <p><strong>ID:</strong> ${dados.id}</p>
+            <p><strong>ID Usuário:</strong> ${dados.id_usuario}</p>
+            <p><strong>ID Produto:</strong> ${dados.id_produto}</p>
+            <p><strong>Quantidade:</strong> ${dados.quantidade}</p>
+            <p><strong>Data:</strong> ${new Date(dados.dt_compra).toLocaleDateString('pt-BR')}</p>
+            <p><strong>Preço Unitário:</strong> R$ ${dados.preco_unit.toFixed(2)}</p>
+            <p><strong>Desconto:</strong> ${dados.desc_aplicado}%</p>
+            <p><strong>Preço Final:</strong> R$ ${dados.preco_final.toFixed(2)}</p>
+            <p><strong>Pagamento:</strong> ${dados.forma_pagamento}</p>
+            <p><strong>Status:</strong> ${dados.status_compra}</p>`
+    })
+    .catch(err => {
+        res.innerHTML = "Erro ao consultar o produto"
         console.error(err)
     })
 })

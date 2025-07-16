@@ -29,6 +29,27 @@ const consultar = async (req, res) => {
     }
 }
 
+const consultarNome = async(req, res) =>{
+    try {
+        const nome = req.params.nome.toLoweCase()
+        const valor = await Produto.findAl({where: {nome:{[sequelize.Op.like]: `%${nome}`}}})
+        if (valor) {
+            console.log(valor)
+            res.status(200).json(valor)        
+        } else {
+            console.error('Não há dados cadastrados!', err)
+            res.status(404).json({
+                message: 'Não há dados cadastrados!'
+            })
+        }
+    } catch (err) {
+        console.error('Não foi possivel consultar!', err)
+        res.status(201).json({
+            message: 'Não foi possivel consultar!'
+        })
+    }
+}
+
 const listar = async (req, res) => {
     try {
         const produtos = await Produto.findAll()
@@ -78,4 +99,4 @@ const atualizar = async (req, res) => {
     }
 }
 
-module.exports = { cadastrar, consultar, listar, atualizar, apagar }
+module.exports = { cadastrar, consultar, consultarNome, listar, atualizar, apagar }

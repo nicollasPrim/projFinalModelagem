@@ -2,7 +2,8 @@ const cadastrar = document.getElementById('cadastrarProduto')
 const buscar = document.getElementById('buscar')
 const atualizar = document.getElementById('atualizarProduto')
 const apagar = document.getElementById('apagarProduto') 
-const consultar = document.getElementById('consultarProduto')
+const consultarId = document.getElementById('consultarIdProduto')
+const consultarNome = document.getElementById('consultarNomeProduto')
 const listar = document.getElementById('listarProduto')   
 const res = document.getElementById('res')
 
@@ -50,12 +51,46 @@ cadastrar.addEventListener('click', (e) => {
     })
 })
 
-consultar.addEventListener('click', (e) => {
+consultarId.addEventListener('click', (e) => {
     e.preventDefault()
 
     const id = document.getElementById('id').value
 
     fetch(`http://localhost:3000/produto/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(produto => {
+        const precoComDesconto = (produto.price * (1 - produto.discountPercentage / 100)).toFixed(2)
+    
+        res.innerHTML = `
+            <p><strong>ID:</strong> ${produto.id}</p>
+            <p><strong>Título:</strong> ${produto.title}</p>
+            <p><strong>Descrição:</strong> ${produto.description}</p>
+            <p><strong>Categoria:</strong> ${produto.category}</p>
+            <p><strong>Preço:</strong> R$ ${produto.price.toFixed(2)}</p>
+            <p><strong>Desconto:</strong> ${produto.discountPercentage}%</p>
+            <p><strong>Preço com Desconto:</strong> R$ ${precoComDesconto}</p>
+            <p><strong>Estoque:</strong> ${produto.stock}</p>
+            <p><strong>Marca:</strong> ${produto.brand}</p>
+            <p><strong>Imagem:</strong> <a href="${produto.thumbnail}" target="_blank">Visualizar</a></p>
+        `
+    })
+    .catch(err => {
+        res.innerHTML = "Erro ao consultar o produto"
+        console.error(err)
+    })
+})
+
+consultarNome.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const nomeProcura = document.getElementById('nomeProcura').value
+
+    fetch(`http://localhost:3000/produto/nome/${nomeProcura}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

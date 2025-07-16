@@ -22,6 +22,16 @@
     <main>
         <section id="graficos" class="painel hidden">
             <h2>Gráficos</h2>
+            <br>
+            <form class="filtro">
+                <h3>Filtro de ID</h3><br>
+                <label for="idInicio">ID Inicial:</label>
+                <input type="number" id="idInicio" min="1" />
+                <label for="idFim">ID Final:</label>
+                <input type="number" id="idFim" min="1" />
+                <button id="btnFiltrar">Filtrar</button>
+            </form>
+            <br>
             <canvas id="graficoEstoque" width="400" height="200"></canvas>
             <canvas id="graficoIdade" width="400" height="200"></canvas>
         </section>

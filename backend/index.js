@@ -19,6 +19,7 @@ app.use(cors()) // ativa o cors
 app.post('/compra', compraController.cadastrar)
 app.get('/compra', compraController.listar)
 app.get('/compra/:id', compraController.consultar)
+app.get('/produto/nome/:nome', compraController.consultarNome)
 app.put('/compra/:id', compraController.atualizar)
 app.delete('/compra/:id', compraController.apagar)
 
@@ -26,6 +27,7 @@ app.delete('/compra/:id', compraController.apagar)
 app.post('/usuario', usuarioController.cadastrar)
 app.get('/usuario', usuarioController.listar)
 app.get('/usuario/:id', usuarioController.consultar)
+app.get('/produto/nome/:nome', usuarioController.consultarNome)
 app.put('/usuario/:id', usuarioController.atualizar)
 app.delete('/usuario/:id', usuarioController.apagar)
 
@@ -33,6 +35,7 @@ app.delete('/usuario/:id', usuarioController.apagar)
 app.post('/produto', produtoController.cadastrar)
 app.get('/produto', produtoController.listar)
 app.get('/produto/:id', produtoController.consultar)
+app.get('/produto/nome/:nome', produtoController.consultarNome)
 app.put('/produto/:id', produtoController.atualizar)
 app.delete('/produto/:id', produtoController.apagar)
 

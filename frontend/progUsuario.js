@@ -3,7 +3,8 @@ const cadastrar = document.getElementById('cadastrarUsuario')
 const buscar = document.getElementById('buscar')
 const atualizar = document.getElementById('atualizarUsuario')
 const apagar = document.getElementById('apagarUsuarios') 
-const consultar = document.getElementById('consultarUsuario')
+const consultarId = document.getElementById('consultarUsuario')
+const consultarNome = document.getElementById('consultarNomeUsuario')
 const listar = document.getElementById('listarUsuarios')   
 const res = document.getElementById('res')
 
@@ -48,7 +49,7 @@ cadastrar.addEventListener('click', (e) => {
 })
 
 
-consultar.addEventListener('click', (e) =>{
+consultarId.addEventListener('click', (e) =>{
     e.preventDefault()
 
     const id = document.getElementById('id').value
@@ -81,6 +82,36 @@ consultar.addEventListener('click', (e) =>{
     })
     .catch(err => {
         res.innerHTML = "Erro ao buscar o usuario: ", err.message
+        console.error(err)
+    })
+})
+
+consultarNome.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const nomeProcura = document.getElementById('nomeProcura').value
+
+    fetch(`http://localhost:3000/usuario/nome/${nomeProcura}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(usuario => {
+        res.innerHTML = `
+            <p><strong>ID:</strong> ${usuario.id}</p>
+            <p><strong>Nome:</strong> ${usuario.firstName} ${usuario.lastName}</p>
+            <p><strong>Idade:</strong> ${usuario.age}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+            <p><strong>Telefone:</strong> ${usuario.phone}</p>
+            <p><strong>Endereço:</strong> ${usuario.address}</p>
+            <p><strong>Cidade:</strong> ${usuario.city}</p>
+            <p><strong>Estado:</strong> ${usuario.state}</p>
+            <p><strong>Nascimento:</strong> ${usuario.birthDate}</p>`
+    })
+    .catch(err => {
+        res.innerHTML = "Erro ao consultar o produto"
         console.error(err)
     })
 })

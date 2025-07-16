@@ -23,8 +23,9 @@
     <section id="compras" class="painel hidden">
         <h2>Gerenciar Compras</h2>
         <form id="formCompra">
-          <input type="number" placeholder="Código" id="id" />
-          <button type="button" id="buscar">Buscar</button>
+        <input type="number" placeholder="Código" id="id" />
+        <input type="text" placeholder="Nome" id="nomeProcura" />
+        <button type="button" id="buscar">Buscar</button>
           <br>
           <input type="number" placeholder="Código Usuário" id="userId" />
           <input type="number" placeholder="Código Produto" id="productId" />
@@ -38,6 +39,7 @@
           <button type="submit" id="cadastrarCompra">Cadastrar</button>
           <button type="submit" id="atualizarCompra">Atualizar</button>
           <button type="button" id="consultarCompra">Consultar</button>
+          <button type="button" id="consultarNomeCompra" >Consultar por nome</button>
           <button type="button" id="listarCompra">Listar Todos</button>
           <button type="button" id="apagarCompra">Apagar</button>
         </form>
