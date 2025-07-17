@@ -56,7 +56,7 @@ npm install --save sequelize express cors mysql2 dotenv
 - Crie um banco no MySQL com o nome:
 
 ```sql
-CREATE DATABASE projeto_final;
+CREATE DATABASE compras_db;
 ```
 
 - No arquivo `db/conn.js`, atualize com suas credenciais do MySQL:
