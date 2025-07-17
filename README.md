@@ -48,7 +48,7 @@ cd projFinalModelagem
 ### 2. Instale as dependências
 
 ```bash
-npm install
+npm install --save sequelize express cors mysql2 dotenv
 ```
 
 ### 3. Configure o banco de dados
